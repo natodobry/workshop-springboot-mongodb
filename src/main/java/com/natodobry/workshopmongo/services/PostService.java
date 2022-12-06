@@ -4,6 +4,7 @@ import com.natodobry.workshopmongo.domain.Post;
 import com.natodobry.workshopmongo.repository.PostRepository;
 import com.natodobry.workshopmongo.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,6 +25,6 @@ public class PostService {
 
     }
     public List<Post> findByTitle(String text){
-        return repo.findByTitleContainingIgnoreCase(text);
+        return repo.searchTitle(text);
     }
 }
