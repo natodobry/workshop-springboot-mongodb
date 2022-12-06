@@ -1,7 +1,6 @@
 package com.natodobry.workshopmongo.services;
 
 import com.natodobry.workshopmongo.domain.Post;
-import com.natodobry.workshopmongo.domain.User;
 import com.natodobry.workshopmongo.repository.PostRepository;
 import com.natodobry.workshopmongo.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +22,8 @@ public class PostService {
         Optional<Post> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
 
+    }
+    public List<Post> findByTitle(String text){
+        return repo.findByTitleContainingIgnoreCase(text);
     }
 }

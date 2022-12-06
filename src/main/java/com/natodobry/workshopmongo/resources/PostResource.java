@@ -1,6 +1,7 @@
 package com.natodobry.workshopmongo.resources;
 
 import com.natodobry.workshopmongo.domain.Post;
+import com.natodobry.workshopmongo.resources.util.URL;
 import com.natodobry.workshopmongo.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,5 +29,13 @@ public class PostResource {
         Post obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
+
+    @RequestMapping(value = "/titlesearch", method = RequestMethod.GET)
+    public ResponseEntity<List<Post>> findByTitle(@RequestParam(value="text", defaultValue = "") String text) {
+       text = URL.decodParam(text);
+       List<Post> list = service.findByTitle(text);
+       return ResponseEntity.ok().body(list);
+    }
+
 
 }
